@@ -12,7 +12,7 @@ void SingleNotes::Start() {
     bool guess_correct;
     Note note;
     while (user_input != "q") {
-        note.Randomize(60, 72);
+        note.Randomize(48, 85);
         note.Play();
         std::cout << "Playing...\n";
         std::cin >> user_input;

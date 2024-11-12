@@ -1,5 +1,5 @@
 #include <fluidsynth.h>
-#include "note.h"
+
 class Synth {
     public:
         static void Init();

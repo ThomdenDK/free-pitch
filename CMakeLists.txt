@@ -4,7 +4,16 @@ project(FreePitch)
 set(CMAKE_CXX_STANDARD 20)
 
 find_library(FLUIDSYNTH_LIBRARY NAMES fluidsynth)
+find_library(SDL2_LIBRARY NAMES SDL2)
+find_library(SDL2_TTF_LIBRARY NAMES SDL2_ttf)
 
-add_executable(main main.cc free_pitch.cc single_notes.cc note.cc synth.cc)
+add_executable(main main.cc)
 
-target_link_libraries(main PRIVATE ${FLUIDSYNTH_LIBRARY})
+add_subdirectory(src)
+
+target_link_libraries(main PRIVATE 
+    core
+    ${FLUIDSYNTH_LIBRARY} 
+    ${SDL2_LIBRARY}
+    ${SDL2_TTF_LIBRARY}
+)

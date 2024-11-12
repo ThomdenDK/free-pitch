@@ -5,7 +5,7 @@
 #include <thread>
 #include "note.h"
 #include "notenames.h"
-#include "synth.h"
+#include "src/synth.h"
 
 // Function to play a note using FluidSynth on a separate thread
 void playNote(fluid_synth_t* synth, int channel, int key, int velocity, int duration) {
