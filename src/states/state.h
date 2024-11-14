@@ -3,12 +3,15 @@
 #include <vector>
 
 class UIElement;
+class UIClickable;
 
 class State {
     private:
-        std::vector<UIElement*> UI_elements;
+        std::vector<UIElement*> ui_elements;
+        std::vector<UIClickable*> ui_clickables;
     public:
         virtual void HandleEvent(SDL_Event& event) = 0;
-        int HandleAllEvents();
         std::vector<UIElement*> GetUIElements();
+        std::vector<UIClickable*> GetUIClickables();
+        int HandleAllEvents();
 };

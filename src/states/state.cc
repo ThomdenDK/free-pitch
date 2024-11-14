@@ -1,9 +1,15 @@
 #include <vector>
 #include <SDL2/SDL.h>
 #include "state.h"
+#include "ui_elements/ui_element.h"
+#include "ui_elements/ui_clickable.h"
 
 std::vector<UIElement*> State::GetUIElements() {
-    return UI_elements;
+    return ui_elements;
+}
+
+std::vector<UIClickable*> State::GetUIClickables() {
+    return ui_clickables;
 }
 
 //Returns -1 when loop should quit

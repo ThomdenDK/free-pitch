@@ -1,3 +1,3 @@
-#include "free_pitch.h"
+#include "i_free_pitch.h"
 
-FreePitch* InitializeFreePitch();
+IFreePitch* InitializeFreePitch();

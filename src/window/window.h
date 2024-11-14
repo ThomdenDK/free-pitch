@@ -1,19 +1,21 @@
+#pragma once
 #include <string>
+#include <memory>
+#include "free_pitch/i_window.h"
 
 class UIElement;
 class SDL_Rect;
 class SDL_Color;
 class State;
 
-class Window {
+class Window : public IWindow {
     public:
         void Open();
         void Close();
         void Render();
-        void DrawStateContents(State* state);
-        void Write(const char* text, SDL_Color color, SDL_Rect rect);
+        void DrawStateContents(State& state);
     private:
-        void Draw(UIElement* obj);
         SDL_Renderer* renderer;
         SDL_Window* window;
+        void Draw(UIElement& obj);
 };

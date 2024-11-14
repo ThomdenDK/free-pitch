@@ -1,10 +1,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
-#include <string>
-#include "ui_element.h"
+#include <memory>
+#include "ui_elements/ui_element.h"
 #include "window.h"
-#include "state.h"
+#include "states/state.h"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
@@ -40,33 +40,23 @@ void Window::Open() {
         return;
     }
 }
+
 void Window::Close() {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
+
 void Window::Render() {
     SDL_RenderPresent(this->renderer);
 }
-void Window::Draw(UIElement* obj) {
+
+void Window::Draw(UIElement& obj) {
     SDL_RenderPresent(this->renderer);
 }
-void Window::Write(const char* text, SDL_Color color, SDL_Rect rect) 
-{
-    TTF_Font* font = TTF_OpenFont("../resources/fonts/UbuntuMono-Regular.ttf", 24);
-    if (!font) {
-        std::cout << "Failed to load font: " << TTF_GetError() << std::endl;
-        return;
-    }
 
-    SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
-    SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surface);
-    if (rect.h == 0) rect.h = rect.w / sizeof(text);
-    SDL_RenderCopy(renderer, message, NULL, &rect);
-}
-
-void Window::DrawStateContents(State* state) {
-    for (UIElement obj : state->GetUIElements()) {
-        this->Draw(obj);
+void Window::DrawStateContents(State& state) {
+    for (UIElement* obj : state.GetUIElements()) {
+        this->Draw(*obj);
     }
 }

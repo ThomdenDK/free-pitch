@@ -1,5 +1,5 @@
 #pragma once
-class FreePitch {
+class IFreePitch {
     public:
         virtual void Run() = 0;
 };
