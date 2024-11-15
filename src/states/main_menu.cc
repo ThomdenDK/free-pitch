@@ -7,9 +7,17 @@
 
 MainMenu::MainMenu() {
     UIElement *title, *minigames_button;
-    title = new UIText("FreePitch", {255, 255, 255}, {100, 100, 400, 0});
-    minigames_button = new UIButton("Minigames", 
-        {255, 255, 255}, {0, 0, 0}, {100, 400, 400, 0});
+    title = new UIText(
+        "FreePitch", 
+        {255, 255, 255}, 
+        {0.2, 0.2, 0.6, 0.0}
+    );
+    minigames_button = new UIButton(
+        "Minigames", 
+        {255, 255, 255}, 
+        {0, 0, 0}, 
+        {0.2, 0.5, 0.6, 0}
+    );
     this->ui_elements.push_back(title);
     this->ui_elements.push_back(minigames_button);
     this->ui_clickables.push_back((UIClickable*)minigames_button);

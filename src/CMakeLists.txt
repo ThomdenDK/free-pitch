@@ -14,5 +14,4 @@ target_link_libraries(core PRIVATE
 
 target_include_directories(core PRIVATE
     ${CMAKE_SOURCE_DIR}/src
-    ${CMAKE_SOURCE_DIR}/include
 )

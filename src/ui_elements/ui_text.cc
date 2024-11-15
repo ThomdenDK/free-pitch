@@ -3,12 +3,14 @@
 #include <iostream>
 #include <string>
 #include "ui_text.h"
+#include "prop_to_pixel.h"
+#include "prop_rect.h"
 
-UIText::UIText(std::string str, SDL_Color color, SDL_Rect rect) {
+UIText::UIText(std::string str, SDL_Color color, PropRect prop_rect) {
     this->str = str;
     this->color = color;
-    this->rect = rect;
-    if (rect.h == 0) this->rect.h = rect.w / str.length() * 2;
+    this->prop_rect = prop_rect;
+    if (prop_rect.h == 0) this->prop_rect.h = prop_rect.w / str.length() * 3;
 }
 
 void UIText::Draw(SDL_Renderer* renderer) {
@@ -20,5 +22,6 @@ void UIText::Draw(SDL_Renderer* renderer) {
 
     SDL_Surface* surface = TTF_RenderText_Solid(font, str.c_str(), color);
     SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_RenderCopy(renderer, message, NULL, &rect);
+    SDL_Rect pixel_rect = PropToPixel(prop_rect, renderer);
+    SDL_RenderCopy(renderer, message, NULL, &pixel_rect);
 }

@@ -3,10 +3,13 @@
 #include "ui_text.h"
 #include "ui_clickable.h"
 #include "ui_rect.h"
+#include "prop_rect.h"
+#include "prop_to_pixel.h"
+#include "free_pitch/i_window.h"
 
-UIButton::UIButton(std::string str, SDL_Color text_color, SDL_Color bkg_color, SDL_Rect rect) {
-    this->text = std::make_unique<UIText>(UIText(str, text_color, rect));
-    this->rect = std::make_unique<UIRect>(UIRect(rect, bkg_color));
+UIButton::UIButton(std::string str, SDL_Color text_color, SDL_Color bkg_color, PropRect prop_rect) {
+    this->text = std::make_unique<UIText>(UIText(str, text_color, prop_rect));
+    this->rect = std::make_unique<UIRect>(UIRect(prop_rect, bkg_color));
 }
 
 void UIButton::Draw(SDL_Renderer* renderer) {

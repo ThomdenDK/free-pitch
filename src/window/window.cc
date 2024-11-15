@@ -6,8 +6,8 @@
 #include "window.h"
 #include "states/state.h"
 
-const int WINDOW_WIDTH = 640;
-const int WINDOW_HEIGHT = 480;
+const int INIT_WINDOW_WIDTH = 640;
+const int INIT_WINDOW_HEIGHT = 480;
 
 void Window::Open() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -21,9 +21,9 @@ void Window::Open() {
         return;
     }
 
-    window = SDL_CreateWindow("SDL2 Button Example",
+    window = SDL_CreateWindow("FreePitch",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+        INIT_WINDOW_WIDTH, INIT_WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
     if (!window) {
         std::cerr << "Failed to create window: " << SDL_GetError() << std::endl;
         SDL_Quit();
@@ -52,6 +52,7 @@ void Window::Render() {
 }
 
 void Window::DrawStateContents(State& state) {
+    SDL_RenderClear(this->renderer);
     for (UIElement* obj : state.GetUIElements()) {
         obj->Draw(this->renderer);
     }

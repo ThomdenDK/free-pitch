@@ -20,5 +20,6 @@ void FreePitch::Run() {
         window.DrawStateContents(state);
         window.Render();
     }
+    
     window.Close();
 }

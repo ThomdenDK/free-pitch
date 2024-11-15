@@ -1,5 +1,6 @@
 #pragma once
 class SDL_Renderer;
+class IWindow;
 
 class UIElement {
     public:
