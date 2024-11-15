@@ -5,16 +5,19 @@
 #include "states/state.h"
 #include "states/main_menu.h"
 
-FreePitch::FreePitch(IWindow& win) : window(win) {}
+FreePitch::FreePitch(IWindow& win, State& initial_state) : 
+    window(win), state(initial_state) {}
+
+void FreePitch::ChangeState(State& state) {
+    this->state = state;
+}
 
 void FreePitch::Run() {
     window.Open();
-    //Start program from the main menu
-    std::unique_ptr<State> state = std::make_unique<MainMenu>();
 
     while (1) {
-        if (state->HandleAllEvents() < 0) break;
-        window.DrawStateContents(*state);
+        if (state.HandleAllEvents() < 0) break;
+        window.DrawStateContents(state);
         window.Render();
     }
     window.Close();

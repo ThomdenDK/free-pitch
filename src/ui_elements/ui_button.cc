@@ -5,8 +5,8 @@
 #include "ui_rect.h"
 
 UIButton::UIButton(std::string str, SDL_Color text_color, SDL_Color bkg_color, SDL_Rect rect) {
-    *this->text = UIText(str, text_color, rect);
-    *this->rect = UIRect(rect, bkg_color);
+    this->text = std::make_unique<UIText>(UIText(str, text_color, rect));
+    this->rect = std::make_unique<UIRect>(UIRect(rect, bkg_color));
 }
 
 void UIButton::Draw(SDL_Renderer* renderer) {

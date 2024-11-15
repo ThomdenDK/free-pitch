@@ -51,12 +51,8 @@ void Window::Render() {
     SDL_RenderPresent(this->renderer);
 }
 
-void Window::Draw(UIElement& obj) {
-    SDL_RenderPresent(this->renderer);
-}
-
 void Window::DrawStateContents(State& state) {
     for (UIElement* obj : state.GetUIElements()) {
-        this->Draw(*obj);
+        obj->Draw(this->renderer);
     }
 }

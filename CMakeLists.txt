@@ -17,3 +17,8 @@ target_link_libraries(main PRIVATE
     ${SDL2_LIBRARY}
     ${SDL2_TTF_LIBRARY}
 )
+
+target_include_directories(main PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/include
+)

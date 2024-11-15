@@ -5,8 +5,8 @@ class State;
 
 class IWindow {
     public:
-        void Open();
-        void Close();
-        void Render();
-        void DrawStateContents(State& state);
+        virtual void Open() = 0;
+        virtual void Close() = 0;
+        virtual void Render() = 0;
+        virtual void DrawStateContents(State& state) = 0;
 };

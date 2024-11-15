@@ -6,6 +6,8 @@
 class UIElement;
 class SDL_Rect;
 class SDL_Color;
+class SDL_Renderer;
+class SDL_Window;
 class State;
 
 class Window : public IWindow {
@@ -17,5 +19,4 @@ class Window : public IWindow {
     private:
         SDL_Renderer* renderer;
         SDL_Window* window;
-        void Draw(UIElement& obj);
 };

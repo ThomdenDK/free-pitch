@@ -8,6 +8,7 @@ UIText::UIText(std::string str, SDL_Color color, SDL_Rect rect) {
     this->str = str;
     this->color = color;
     this->rect = rect;
+    if (rect.h == 0) this->rect.h = rect.w / str.length() * 2;
 }
 
 void UIText::Draw(SDL_Renderer* renderer) {
@@ -19,6 +20,5 @@ void UIText::Draw(SDL_Renderer* renderer) {
 
     SDL_Surface* surface = TTF_RenderText_Solid(font, str.c_str(), color);
     SDL_Texture* message = SDL_CreateTextureFromSurface(renderer, surface);
-    if (rect.h == 0) rect.h = rect.w / sizeof(str);
     SDL_RenderCopy(renderer, message, NULL, &rect);
 }
