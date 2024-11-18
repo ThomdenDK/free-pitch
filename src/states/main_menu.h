@@ -8,6 +8,8 @@ class UIClickable;
 
 class MainMenu : public State {
     public:
-        MainMenu();
+        MainMenu(IFreePitch* fp);
+    private:
         void HandleEvent(SDL_Event& event) override;
+        void HandleClick(int mx, int my, int ww, int wh) override;
 };

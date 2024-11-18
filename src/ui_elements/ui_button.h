@@ -18,5 +18,5 @@ class UIButton : public UIElement, public UIClickable {
     public:
         UIButton(std::string str, SDL_Color text_color, SDL_Color bkg_color, PropRect prop_rect);
         void Draw(SDL_Renderer* renderer) override;
-        bool WasClicked(int x, int y) override;
+        bool WasClicked(int mx, int my, int ww, int wh) override;
 };

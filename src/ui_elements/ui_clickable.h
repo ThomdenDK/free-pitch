@@ -2,5 +2,5 @@
 
 class UIClickable {
     public:
-        virtual bool WasClicked(int x, int y) = 0;
+        virtual bool WasClicked(int mx, int my, int ww, int wh) = 0;
 };

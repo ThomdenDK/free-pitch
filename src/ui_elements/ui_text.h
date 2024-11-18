@@ -12,7 +12,8 @@ class UIText : public UIElement {
         std::string str;
         SDL_Color color;
         PropRect prop_rect;
+        bool auto_adjust_height;
     public:
-        UIText(std::string str, SDL_Color color, PropRect rect);
+        UIText(std::string str, SDL_Color color, PropRect rect, bool auto_adjust_height);
         void Draw(SDL_Renderer* renderer) override;
 };

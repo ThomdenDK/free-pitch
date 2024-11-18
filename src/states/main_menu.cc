@@ -1,18 +1,21 @@
 #include <SDL2/SDL.h>
 #include <memory>
+#include <iostream>
 #include "main_menu.h"
 #include "ui_elements/ui_text.h"
 #include "ui_elements/ui_button.h"
 #include "ui_elements/ui_clickable.h"
+#include "free_pitch/i_window.h"
 
-MainMenu::MainMenu() {
-    UIElement *title, *minigames_button;
-    title = new UIText(
+MainMenu::MainMenu(IFreePitch* fp) {
+    free_pitch = fp;
+    UIText* title = new UIText(
         "FreePitch", 
         {255, 255, 255}, 
-        {0.2, 0.2, 0.6, 0.0}
+        {0.2, 0.2, 0.6, 0.0},
+        true
     );
-    minigames_button = new UIButton(
+    UIButton* minigames_button = new UIButton(
         "Minigames", 
         {255, 255, 255}, 
         {0, 0, 0}, 
@@ -20,16 +23,11 @@ MainMenu::MainMenu() {
     );
     this->ui_elements.push_back(title);
     this->ui_elements.push_back(minigames_button);
-    this->ui_clickables.push_back((UIClickable*)minigames_button);
+    this->ui_clickables.push_back(minigames_button);
 }
 
-void MainMenu::HandleEvent(SDL_Event& event) {
-    if (event.type != SDL_MOUSEBUTTONDOWN) {
-        return;
-    }
-    int x, y;
-    SDL_GetMouseState(&x, &y);
-    if (ui_clickables[0]->WasClicked(x, y)) {
-        
-    }
+void MainMenu::HandleEvent(SDL_Event& event) {}
+
+void MainMenu::HandleClick(int mx, int my, int ww, int wh) {
+
 }

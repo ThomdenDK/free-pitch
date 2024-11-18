@@ -12,10 +12,11 @@ class State;
 
 class Window : public IWindow {
     public:
-        void Open();
-        void Close();
-        void Render();
-        void DrawStateContents(State& state);
+        void Open() override;
+        void Close() override;
+        void Render() override;
+        void GetSize(int* w, int* h) override;
+        void DrawStateContents(State& state) override;
     private:
         SDL_Renderer* renderer;
         SDL_Window* window;

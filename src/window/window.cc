@@ -51,6 +51,10 @@ void Window::Render() {
     SDL_RenderPresent(this->renderer);
 }
 
+void Window::GetSize(int* w, int* h) {
+    SDL_GetWindowSize(window, w, h);
+}
+
 void Window::DrawStateContents(State& state) {
     SDL_RenderClear(this->renderer);
     for (UIElement* obj : state.GetUIElements()) {

@@ -6,10 +6,11 @@ class State;
 
 class FreePitch : public IFreePitch {
     private:
-        State& state;
+        State* state;
         IWindow& window;
     public:
-        FreePitch(IWindow& window, State& initial_state);
+        FreePitch(IWindow& window);
         void Run() override;
-        void ChangeState(State& state) override;
+        IWindow& GetWindow() override;
+        void ChangeState(State* state) override;
 };

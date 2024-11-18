@@ -5,19 +5,22 @@
 #include "states/state.h"
 #include "states/main_menu.h"
 
-FreePitch::FreePitch(IWindow& win, State& initial_state) : 
-    window(win), state(initial_state) {}
+FreePitch::FreePitch(IWindow& win) : window(win) {}
 
-void FreePitch::ChangeState(State& state) {
+void FreePitch::ChangeState(State* state) {
     this->state = state;
+}
+
+IWindow& FreePitch::GetWindow() {
+    return window;
 }
 
 void FreePitch::Run() {
     window.Open();
 
     while (1) {
-        if (state.HandleAllEvents() < 0) break;
-        window.DrawStateContents(state);
+        if (state->HandleAllEvents(window) < 0) break;
+        window.DrawStateContents(*state);
         window.Render();
     }
     
