@@ -13,15 +13,14 @@ std::vector<UIClickable*> State::GetUIClickables() {
     return ui_clickables;
 }
 
-//Returns -1 when loop should quit
-int State::HandleAllEvents(IWindow& window) {
+//Returns -1 when loop should quit. Feeds all current events into state's event handler
+int State::HandleAllEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) return -1;
         if (event.type == SDL_MOUSEBUTTONDOWN) {
             int mx, my, ww, wh;
             SDL_GetMouseState(&mx, &my);
-            window.GetSize(&ww, &wh);
             this->HandleClick(mx, my, ww, wh);
         }
         this->HandleEvent(event);

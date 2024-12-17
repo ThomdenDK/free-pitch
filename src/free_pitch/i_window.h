@@ -1,13 +1,10 @@
-#include <string>
-#include <memory>
-
-class State;
+#pragma once
+class UI;
 
 class IWindow {
     public:
         virtual void Open() = 0;
         virtual void Close() = 0;
         virtual void Render() = 0;
-        virtual void GetSize(int* w, int* h) = 0;
-        virtual void DrawStateContents(State& state) = 0;
+        virtual void DrawUI(UI& ui) = 0;
 };

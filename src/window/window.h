@@ -1,22 +1,17 @@
 #pragma once
-#include <string>
-#include <memory>
 #include "free_pitch/i_window.h"
 
-class UIElement;
-class SDL_Rect;
-class SDL_Color;
 class SDL_Renderer;
 class SDL_Window;
-class State;
+class UI;
 
 class Window : public IWindow {
     public:
+        Window(int w, int h);
         void Open() override;
         void Close() override;
         void Render() override;
-        void GetSize(int* w, int* h) override;
-        void DrawStateContents(State& state) override;
+        void DrawUI(UI& ui) override;
     private:
         SDL_Renderer* renderer;
         SDL_Window* window;

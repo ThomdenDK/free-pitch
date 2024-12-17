@@ -11,6 +11,8 @@ class FreePitch : public IFreePitch {
     public:
         FreePitch(IWindow& window);
         void Run() override;
+        void Run() override;
+        void Run() override;
         IWindow& GetWindow() override;
         void ChangeState(State* state) override;
 };

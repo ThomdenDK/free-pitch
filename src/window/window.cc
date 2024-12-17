@@ -30,7 +30,7 @@ void Window::Open() {
         return;
     }
 
-    SDL_SetWindowResizable(window, SDL_TRUE);
+    //SDL_SetWindowResizable(window, SDL_TRUE);
 
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (!renderer) {

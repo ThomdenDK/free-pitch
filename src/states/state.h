@@ -11,7 +11,7 @@ class State {
     public:
         std::vector<UIElement*> GetUIElements();
         std::vector<UIClickable*> GetUIClickables();
-        int HandleAllEvents(IWindow& window);
+        int HandleAllEvents();
     protected:
         std::vector<UIElement*> ui_elements;
         std::vector<UIClickable*> ui_clickables;
