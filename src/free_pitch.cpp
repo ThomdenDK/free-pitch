@@ -32,6 +32,5 @@ void FreePitch::Run() {
 }
 
 void FreePitch::ChangeState(State* state) {
-    std::cout << "Changed\n";
     this->state = state;
 }
