@@ -1,6 +1,7 @@
 add_library(states STATIC 
-    state.cc 
-    main_menu.cc
+    state.cpp
+    main_menu.cpp
+    minigame_menu.cpp
 )
 
 target_include_directories(states PRIVATE

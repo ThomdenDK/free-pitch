@@ -1,5 +1,4 @@
-#include "prop_to_pixel.h"
-#include "prop_rect.h"
+#include "ui_elements.h"
 #include <SDL2/SDL.h>
 
 SDL_Rect PropToPixel(PropRect prop_rect, SDL_Renderer* renderer) {

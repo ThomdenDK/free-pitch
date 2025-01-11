@@ -1,9 +1,7 @@
 #include <vector>
-#include <SDL2/SDL.h>
-#include "state.h"
-#include "ui_elements/ui_element.h"
-#include "ui_elements/ui_clickable.h"
-#include "free_pitch/i_window.h"
+#include <iostream>
+#include "states.h"
+#include "ui_elements/ui_elements.h"
 
 std::vector<UIElement*> State::GetUIElements() {
     return ui_elements;
@@ -19,11 +17,19 @@ int State::HandleAllEvents() {
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) return -1;
         if (event.type == SDL_MOUSEBUTTONDOWN) {
-            int mx, my, ww, wh;
+            int mx, my;
             SDL_GetMouseState(&mx, &my);
-            this->HandleClick(mx, my, ww, wh);
+            this->HandleClick(mx, my);
         }
         this->HandleEvent(event);
     }
     return 0;
+}
+
+void State::HandleClick(int mx, int my) {
+    for (auto button : this->ui_clickables) {
+        if (button->WasClicked(mx, my)) {
+            button->ExecuteBehaviour();
+        }
+    }
 }

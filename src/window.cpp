@@ -2,14 +2,14 @@
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <memory>
-#include "ui_elements/ui_element.h"
+#include "ui_elements/ui_elements.h"
 #include "window.h"
-#include "states/state.h"
+#include "states/states.h"
 
 const int INIT_WINDOW_WIDTH = 640;
 const int INIT_WINDOW_HEIGHT = 480;
 
-void Window::Open() {
+void Window::Open(int wpx, int hpx) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         std::cerr << "Failed to initialize SDL: " << SDL_GetError() << std::endl;
         return;
@@ -22,8 +22,7 @@ void Window::Open() {
     }
 
     window = SDL_CreateWindow("FreePitch",
-        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        INIT_WINDOW_WIDTH, INIT_WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
+        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, wpx, hpx, SDL_WINDOW_SHOWN);
     if (!window) {
         std::cerr << "Failed to create window: " << SDL_GetError() << std::endl;
         SDL_Quit();
@@ -51,11 +50,11 @@ void Window::Render() {
     SDL_RenderPresent(this->renderer);
 }
 
-void Window::GetSize(int* w, int* h) {
-    SDL_GetWindowSize(window, w, h);
-}
+// void Window::GetSize(int* w, int* h) {
+//     SDL_GetWindowSize(window, w, h);
+// }
 
-void Window::DrawStateContents(State& state) {
+void Window::Draw(State& state) {
     SDL_RenderClear(this->renderer);
     for (UIElement* obj : state.GetUIElements()) {
         obj->Draw(this->renderer);
