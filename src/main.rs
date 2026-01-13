@@ -1,15 +1,19 @@
 use macroquad::prelude::*;
 
-enum AppStates {
-    MainMenu,
-    Settings,
-    MinigameSelection,
-    SingleNoteTrainer,
-    Quit,
+trait AppState {
+    fn update(&self) -> Box<dyn AppState>;
+    fn draw(&self);
 }
 
-impl AppStates {
-    pub fn update(&self) {}
+struct MainMenu;
+impl AppState for MainMenu {
+    fn update(&self) -> Box<dyn AppState> {
+        todo!()
+    }
+
+    fn draw(&self) {
+        todo!()
+    }
 }
 
 /// Configure how many octaves to show (7 white keys per octave)
@@ -19,12 +23,11 @@ const WHITE_PER_OCTAVE: usize = 7;
 #[macroquad::main("Macroquad Piano")]
 async fn main() {
     // Initial state
-    let mut state = AppStates::MainMenu;
+    let mut state = Box::new(MainMenu);
 
     loop {
         state.update();
         state.draw();
-        state = state.state_transition();
     }
 }
 async fn piano() {
