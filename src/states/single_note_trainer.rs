@@ -20,12 +20,13 @@ pub struct KeyConfig {
 
 pub struct SingleNoteTrainer {
     key_config: KeyConfig,
+    note_on: bool,
     synth: Synthesizer,
 }
 
 impl SingleNoteTrainer {
     pub fn new() -> SingleNoteTrainer {
-        let mut sfz = File::open("resources/piano.sfz").unwrap();
+        let mut sfz = File::open("resources/piano.sf2").unwrap();
         let sound_font = Arc::new(SoundFont::new(&mut sfz).unwrap());
         // Create the synthesizer.
         let settings = SynthesizerSettings::new(44100);
@@ -34,13 +35,8 @@ impl SingleNoteTrainer {
         SingleNoteTrainer {
             key_config: KeyConfig::default(),
             synth: synthesizer,
+            note_on: false,
         }
-    }
-    fn get_white_left_edge(&self, id: usize) -> f32 {
-        id as f32 * self.key_config.white_key_width / 2_f32
-    }
-    fn get_black_left_edge(&self, id: usize) -> f32 {
-        (id + 1) as f32 * (self.white_key_width / 2_f32) - self.black_key_width / 2_f32
     }
 }
 
@@ -49,7 +45,13 @@ const NUM_OCTAVES: usize = 2;
 const WHITE_PER_OCTAVE: usize = 7;
 const NUM_WHITE_KEYS: usize = NUM_OCTAVES * WHITE_PER_OCTAVE;
 
-impl AppState for SingleNoteTrainer {
+impl KeyConfig {
+    fn get_white_left_edge(&self, id: usize) -> f32 {
+        id as f32 * self.white_key_width / 2_f32
+    }
+    fn get_black_left_edge(&self, id: usize) -> f32 {
+        (id + 1) as f32 * (self.white_key_width / 2_f32) - self.black_key_width / 2_f32
+    }
     fn update(&mut self) -> StateTransition {
         self.screen_width = screen_width();
         self.screen_height = screen_height();
@@ -99,7 +101,6 @@ impl AppState for SingleNoteTrainer {
         };
         StateTransition::DontTransition
     }
-
     fn draw(&self) {
         clear_background(Color::from_rgba(0, 0, 50, 255));
 
@@ -167,5 +168,30 @@ impl AppState for SingleNoteTrainer {
             String::from("No note is pressed")
         };
         draw_text(&note_msg, 10.0, 100.0, 40.0, Color::new(1.0, 1.0, 1.0, 1.0));
+    }
+}
+
+impl AppState for SingleNoteTrainer {
+    fn update(&mut self) -> StateTransition {
+        let transition = self.key_config.update();
+        println!("{:?}, {}", self.key_config.active_key, self.note_on);
+        if let Some(key) = self.key_config.active_key {
+            if !self.note_on {
+                self.synth.note_on(0, 60, 100);
+            }
+            self.note_on = true;
+        } else {
+            self.synth.note_off_all(false);
+            self.note_on = false;
+        }
+        let mut left: Vec<f32> = vec![0_f32; 512];
+        let mut right: Vec<f32> = vec![0_f32; 512];
+        self.synth.render(&mut left[..], &mut right[..]);
+
+        transition
+    }
+
+    fn draw(&self) {
+        self.key_config.draw();
     }
 }
